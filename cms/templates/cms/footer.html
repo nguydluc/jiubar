@@ -1,0 +1,80 @@
+{% load static %}
+
+<!--FOOTER-->
+<footer
+  class="bg-brand-blue px-[5%] flex flex-col gap-6 justify-center items-center py-[5%]"
+>
+  <a href="{% url 'index' %}">
+    <img
+      class="logo fill-brand-white w-30 cursor-pointer"
+      alt="Jiu Bar logo"
+      src="{% static 'logo/full-logo.svg'%}"
+    />
+  </a>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+    <div>
+      <h2 class="text-2xl font-bold text-brand-pink py-6">Contact Us</h2>
+      <div class="flex flex-col gap-6">
+        <div class="flex gap-2 items-center">
+          <ion-icon
+            class="text-brand-pink text-[32px]"
+            name="call-outline"
+          ></ion-icon>
+          <a href="tel:{{contact.phone}}" class="text-brand-white text-base"
+            >{{ contact.phone }}</a
+          >
+        </div>
+        <div class="flex gap-2 items-center">
+          <ion-icon
+            class="text-brand-pink text-[32px]"
+            name="mail-outline"
+          ></ion-icon>
+          <a href="mailto: {{contact.email}}" class="text-brand-white text-base"
+            >{{ contact.email }}</a
+          >
+        </div>
+        <div class="flex gap-2 items-center">
+          <ion-icon
+            class="text-brand-pink text-[32px]"
+            name="location-outline"
+          ></ion-icon>
+          <address class="text-brand-white text-base">
+            {{ contact.address}}
+          </address>
+        </div>
+      </div>
+    </div>
+    <!--Loop-->
+    <div class="flex flex-col items-start">
+      <h3 class="text-2xl font-bold text-brand-pink my-6">Hour of Operation</h3>
+      <!--Loop here-->
+      <table class="text-brand-white table-auto text-left">
+        {% for hour in hours %}
+        <tr>
+          <th class="px-2 py-1">{{hour.day}}</th>
+          {% for time in hour.timesets.all %}
+          <td class="px-2 py-1">{{time.opening}} - {{time.closing}}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    <div>
+      <h3 class="text-2xl font-bold text-brand-pink my-6">Social Media</h3>
+      <div class="flex gap-3">
+        <p class="text-base text-brand-white font-bold">Follow us</p>
+        <ion-icon
+          class="text-brand-pink text-[32px]"
+          name="logo-facebook"
+        ></ion-icon>
+        <ion-icon
+          class="text-brand-pink text-[32px]"
+          name="logo-instagram"
+        ></ion-icon>
+      </div>
+    </div>
+    <p class="text-white text-center md:text-left pt-12 pb-3">
+      &copy; {% now "Y" %} Jiu Bar. All rights reserved.
+    </p>
+  </div>
+</footer>
