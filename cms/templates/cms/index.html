@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+          <title>Jiu Bar - Home</title>
+{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+{% endblock %}
+    {% block body %}
+    <section
+      class="bg-cover bg-center h-[60vh] flex flex-col justify-center bg-opacity-70 px-[5%] md:px-[12%]"
+      style="background-image: url('{% static 'img/hero-img.png'%}')"
+    >
+      <h1 class="font-bold text-2xl md:text-4xl text-brand-white mb-6">
+        Asian Tradition Meets Modern Flair
+      </h1>
+      <p class="font-medium text-base md:text-lg text-brand-white mb-12">
+        Savour the best Asian Fusion cuisine Calgary has to offer while enjoying
+        the exquisite ambiance with your friends and family.
+      </p>
+      <div class="flex gap-4">
+        <a
+          href="{% url 'menu' %}"
+          class="bg-brand-red text-brand-white hover:bg-brand-pink hover:text-brand-blue p-3 font-bold"
+          >Menu</a
+        >
+        <a
+          href="https://www.doordash.com/"
+          class="bg-brand-red text-brand-white hover:bg-brand-pink hover:text-brand-blue p-3 font-bold"
+          >Order Now</a
+        >
+      </div>
+    </section>
+    <section class="px-[5%] md:px-[12%]">
+      <h2
+        class="text-2xl md:text-3xl font-bold text-brand-white text-center my-10"
+      >
+        About
+      </h2>
+      <p class="text-base md:text-lg text-brand-white font-mediu mb-6">
+        Jiu Bar is a high-end Asian Fusion restaurant and bar that prides itself
+        on serving exceptional Asian cuisine using innovative Western cooking
+        techniques. Located in the heart of downtown Calgary, the restaurant is
+        helmed by renowned chef Pei Yu.
+      </p>
+      <p class="text-base md:text-lg text-brand-white font-medium mb-6">
+        The restaurant's unique concept was developed by one of Calgary's most
+        popular designers, Dylan Luc. He was inspired by a vision of Jiu Bar in
+        his dream and brought it to life through his branding concept.
+      </p>
+      <p class="text-base text-brand-white font-medium mb-6">
+        We invite you to experience Jiu Bar's exquisite ambiance, killer
+        cocktails, craft beer, great wine and tunes, and eclectic décor. Come
+        and join us for a memorable dining experience. We look forward to
+        welcoming you!
+      </p>
+    </section>
+    <div id="contact" class="md:flex md:items-top md:justify-center">
+      <section>
+        <h2
+          class="text-2xl md:text-3xl font-bold text-brand-white text-center my-10"
+        >
+          Contact Us
+        </h2>
+        <div class="flex flex-col p-[5%] gap-6">
+          <div class="flex gap-2 items-center">
+            <ion-icon
+              class="text-brand-pink text-[32px]"
+              name="call-outline"
+            ></ion-icon>
+            <a href="tel:{{contact.phone}}" class="text-brand-white text-base"
+              >{{ contact.phone }}</a
+            >
+          </div>
+          <div class="flex gap-2 items-center">
+            <ion-icon
+              class="text-brand-pink text-[32px]"
+              name="mail-outline"
+            ></ion-icon>
+            <a
+              href="mailto: {{contact.email}}"
+              class="text-brand-white text-base"
+              >{{ contact.email }}</a
+            >
+          </div>
+          <div class="flex gap-2 items-center">
+            <ion-icon
+              class="text-brand-pink text-[32px]"
+              name="location-outline"
+            ></ion-icon>
+            <address class="text-brand-white text-base">
+              {{ contact.address}}
+            </address>
+          </div>
+          <div class="flex gap-3">
+            <p class="text-base text-brand-white font-bold">Follow us</p>
+            <a href="{{contact.facebook_link}}" target="_blank">
+              <ion-icon
+                class="text-brand-pink text-[32px]"
+                name="logo-facebook"
+              ></ion-icon>
+            </a>
+            <a href="{{contact.instagram_link}}" target="_blank">
+              <ion-icon
+                class="text-brand-pink text-[32px]"
+                name="logo-instagram"
+              ></ion-icon>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section class="px-[5%] pb-20">
+        <h2
+          class="text-2xl md:text-3xl font-bold text-brand-white text-center my-10"
+        >
+          Hour of Operation
+        </h2>
+        <!--Loop here-->
+        <table class="text-brand-white table-auto text-left">
+          {% for hour in hours %}
+          <tr>
+            <th class="px-2 py-1">{{hour.day}}</th>
+            {% for time in hour.timesets.all %}
+            <td class="px-2 py-1">{{time.opening}} - {{time.closing}}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+      </section>
+    </div>
+    <section class="bg-[#D9D9D9] flex flex-col items-center px-[5%] pb-6">
+      <h2
+        class="text-brand-blue text-2xl md:text-3xl font-bold text-center my-10"
+      >
+        Our Food Gallery
+      </h2>
+      <!--Loops-->
+      <div class="bg-brand-white grid grid-cols-2 md:grid-cols-3 gap-6 p-2">
+        {% for picture in pictures %}
+        <div
+          class="bg-cover bg-center w-[150px] h-[150px] md:w-[200px] md:h-[200px]"
+          style="background-image: url('{{ picture.image.url }}')"
+        ></div>
+        {% endfor %}
+      </div>
+    </section>
+
+    {% endblock %}
+    {% block script %} 
+    <script>
+      const navLinks = document.querySelector(".nav-links");
+      function onToggleMenu(e) {
+        e.name = e.name === "menu-outline" ? "close-outline" : "menu-outline";
+        navLinks.classList.toggle("top-[9%]");
+      }
+    </script>
+    {% endblock %}
+</html>

@@ -1,0 +1,32 @@
+{% load static %} {% load static tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% block title %}
+
+    {% endblock %}
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    {% block css %} {% endblock %}
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+    </style>
+    {% tailwind_css %}
+  </head>
+  <body class="font-open-sans bg-brand-black">
+    {% include "header.html" %} 
+    {% block body %} 
+    {% endblock %} 
+    {% include "footer.html" %}
+  </body>
+  {% block script %} {% endblock %}
+</html>
