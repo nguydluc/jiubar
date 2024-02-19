@@ -26,7 +26,8 @@ SECRET_KEY = "django-insecure-lma8bnhx1atc-6b=u=4_zok5hhn2481od2&!_7!f^%bpbio#rt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [".vercel.app"]
+ALLOWED_HOSTS = ["127.0.0.1", ".vercel.app"]
+
 
 # ALLOWED_HOST = [""]
 
@@ -42,7 +43,7 @@ INSTALLED_APPS = [
     # "tailwind",
     # "theme",
     "cms",  # Django app
-    # "django_browser_reload",
+    "django_browser_reload",
     "storages",
 ]
 
