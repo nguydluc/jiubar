@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "cms",  # Django app
     "django_browser_reload",
     "storages",
+    "corsheaders",
 ]
 
 # TAILWIND_APP_NAME = "theme"
