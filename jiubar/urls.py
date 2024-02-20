@@ -26,7 +26,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("cms.urls")),
     path("__reload__/", include("django_browser_reload.urls")),
-    path("favicon.ico", RedirectView.as_view(url="/static/favicon.ico")),
+    path("favicon.ico", RedirectView.as_view(url=settings.STATIC_URL + "favicon.ico")),
 ]
 
 if settings.DEBUG:
