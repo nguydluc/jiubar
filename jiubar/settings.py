@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,9 +31,9 @@ SECRET_KEY = "django-insecure-lma8bnhx1atc-6b=u=4_zok5hhn2481od2&!_7!f^%bpbio#rt
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    #    ".vercel.app",
-    #    "127.0.0.1",
-    #    "jiubar.cn2e4iy26dk1.us-east-1.rds.amazonaws.com",
+    # ".vercel.app",
+    # "127.0.0.1",
+    # "now.sh",
     "*"
 ]
 
@@ -44,13 +48,14 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "cloudinary_storage",
     "django.contrib.staticfiles",
+    "cloudinary",
     # "tailwind",
     # "theme",
     "cms",  # Django app
     "django_browser_reload",
     "storages",
-    "corsheaders",
 ]
 
 # TAILWIND_APP_NAME = "theme"
@@ -99,14 +104,25 @@ WSGI_APPLICATION = "jiubar.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#    "default": {
+#        "ENGINE": "django.db.backends.postgresql",
+#        "NAME": "postgres",
+#        "USER": "jiubar",
+#        "PASSWORD": "Jiubar123",
+#        "HOST": "jiubar.cn2e4iy26dk1.us-east-1.rds.amazonaws.com",
+#        "PORT": "5432",
+#    }
+# }
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "jiubar",
-        "PASSWORD": "Jiubar123",
-        "HOST": "jiubar.cn2e4iy26dk1.us-east-1.rds.amazonaws.com",
-        "PORT": "5432",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "HOST": env("HOST"),
+        "NAME": env("NAME"),
+        "USER": env("USER"),
+        "PASSWORD": env("PASSWORD"),
+        "PORT": env("PORT"),
     }
 }
 
@@ -148,6 +164,16 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = "cms/static/"
+
+
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": env("CLOUD_NAME"),
+    "API_KEY": env("API_KEY"),
+    "API_SECRET": env("API_SECRET"),
+}
+
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
