@@ -94,7 +94,7 @@ WSGI_APPLICATION = "jiubar.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "",
+        "NAME": "jiubar",
         "USER": "jiubar",
         "PASSWORD": "Jiubar123",
         "HOST": "jiubar.cn2e4iy26dk1.us-east-1.rds.amazonaws.com",
