@@ -27,9 +27,10 @@ SECRET_KEY = "django-insecure-lma8bnhx1atc-6b=u=4_zok5hhn2481od2&!_7!f^%bpbio#rt
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    ".vercel.app",
-    "127.0.0.1",
-    "jiubar.cn2e4iy26dk1.us-east-1.rds.amazonaws.com",
+    #    ".vercel.app",
+    #    "127.0.0.1",
+    #    "jiubar.cn2e4iy26dk1.us-east-1.rds.amazonaws.com",
+    "*"
 ]
 
 
