@@ -118,6 +118,7 @@ WSGI_APPLICATION = "jiubar.wsgi.application"
 #    }
 # }
 
+"""
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
@@ -126,6 +127,18 @@ DATABASES = {
         "USER": env("DB_USER"),
         "PASSWORD": env("DB_PASSWORD"),
         "PORT": env("DB_PORT"),
+    }
+}
+"""
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("POSTGRES_DATABASE"),
+        "USER": os.getenv("POSTGRES_USER"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        "HOST": os.getenv("POSTGRES_HOST"),
+        "PORT": os.getenv("POSTGRES_DB_PORT"),
     }
 }
 
@@ -168,16 +181,16 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = "cms/static/"
 
-
+"""
 CLOUDINARY_STORAGE = {
     "CLOUD_NAME": env("CLOUD_NAME"),
     "API_KEY": env("API_KEY"),
     "API_SECRET": env("API_SECRET"),
 }
+"""
 
-
-DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
-
+# DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
@@ -192,8 +205,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # AWS configuration
 
 
-AWS_ACCESS_KEY_ID = "AKIATCKAT4CFXH6T5THH"
-AWS_SECRET_ACCESS_KEY = "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"
+# AWS_ACCESS_KEY_ID = "AKIATCKAT4CFXH6T5THH"
+# AWS_SECRET_ACCESS_KEY = "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"
 
 
 # Basic Storage Config
