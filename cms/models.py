@@ -3,6 +3,8 @@ from django.db import models
 # Create your models here.
 from django.db import models
 
+from django.conf import settings
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -63,12 +65,35 @@ class OperationHour(models.Model):
         verbose_name_plural = "Operation Hours"
 
 
+"""
 class Gallery(models.Model):
     image = models.ImageField(upload_to="img/")
     description = models.CharField(max_length=255)
 
     def __str__(self):
         return self.description[:50]
+
+    class Meta:
+        verbose_name = "Image"
+        verbose_name_plural = "Gallery"
+"""
+
+
+class Gallery(models.Model):
+    image = models.ImageField(upload_to="img/")
+    description = models.CharField(max_length=255)
+    image_url = models.URLField(blank=True)
+
+    def __str__(self):
+        return self.description[:50]
+
+    def save(self, *args, **kwargs):
+        # Call the original save method
+        super().save(*args, **kwargs)
+
+        if settings.DEFAULT_FILE_STORAGE == "storages.backends.s3boto3.S3Boto3Storage":
+            self.image_url = self.image.url
+            self.save(update_fields=["image_url"])
 
     class Meta:
         verbose_name = "Image"

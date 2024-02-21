@@ -27,7 +27,12 @@ class TimeSetAdmin(admin.ModelAdmin):
 
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
-    list_display = ("image", "description")
+    list_display = ("image", "image_url", "description")
+
+    def image_url(self, obj):
+        return obj.image_url
+
+    image_url.short_description = "Image URL"
 
 
 @admin.register(OperationHour)
