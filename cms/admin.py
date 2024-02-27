@@ -28,6 +28,7 @@ class TimeSetAdmin(admin.ModelAdmin):
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
     list_display = ("image", "description")
+    exclude = ("image_url",)
 
     def image_url(self, obj):
         return obj.image_url
