@@ -38,8 +38,24 @@ class Contact(models.Model):
     facebook_link = models.URLField(null=True)
     instagram_link = models.URLField()
 
-    def __str__(self):
-        return "Contact Information"
+    def save(self, *args, **kwargs):
+        # Check if there's an existing Contact instance
+        if Contact.objects.exists():
+            # If so, update it instead of creating a new one
+            contact = Contact.objects.first()
+            contact.phone = self.phone
+            contact.address = self.address
+            contact.email = self.email
+            contact.facebook_link = self.facebook_link
+            contact.instagram_link = self.instagram_link
+            contact.save()
+        else:
+            # If not, proceed with normal save
+            super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        # Prevent deletion of the single instance
+        pass
 
 
 from django.db import models
