@@ -53,10 +53,6 @@ class Contact(models.Model):
             # If not, proceed with normal save
             super().save(*args, **kwargs)
 
-    def delete(self, *args, **kwargs):
-        # Prevent deletion of the single instance
-        pass
-
 
 from django.db import models
 
