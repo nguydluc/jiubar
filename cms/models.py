@@ -51,7 +51,7 @@ class Contact(models.Model):
             contact.save()
         else:
             # If not, proceed with normal save
-            super().save(*args, **kwargs)
+            super(Contact, self).save(*args, **kwargs)
 
 
 from django.db import models
